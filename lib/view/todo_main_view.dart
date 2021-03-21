@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test_state/model/to_do.dart';
+import '../controller/todo/text_field_method.dart';
+import '../controller/todo/first_column.dart';
+import '../controller/todo/second_column.dart';
+import '../model/to_do.dart';
 
 class ToDoMain extends StatelessWidget {
   const ToDoMain({Key key}) : super(key: key);
@@ -37,96 +40,40 @@ class ToDoMainView extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<ToDo> todoList = [
       ToDo(
-        id: 't1',
-        title: 'Market',
-        task: 'Buying Fruits',
+        idOfToDo: 1,
+        title: 'Marketing',
+        task: 'Fruits',
+        // task: ['Fruits', 'Busicuits', 'Vaegetables', 'Groceries'],
         date: DateTime.now(),
       ),
       ToDo(
-        id: 't2',
-        title: 'Book',
-        task: 'Writing State in Flutter',
+        idOfToDo: 2,
+        title: 'Book Writing',
+        task: 'State in Flutter',
+        // task: ['State in Flutter', 'Immutable Flutter'],
         date: DateTime.now(),
       ),
     ];
+    String inputTitle;
+    String inputTask;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
         scrollDirection: Axis.vertical,
         children: todoList.map((td) {
-          return Row(
-            children: [
-              Card(
-                margin: const EdgeInsets.only(
-                  left: 8.0,
-                  right: 36.0,
-                  top: 8.0,
-                  bottom: 8.0,
-                ),
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    left: 8.0,
-                    right: 16.0,
-                    top: 8.0,
-                    bottom: 8.0,
-                  ),
-                  padding: const EdgeInsets.all(
-                    8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(4278190080),
-                      width: 1.0,
-                      style: BorderStyle.solid,
-                    ),
-                  ),
-                  child: Text(td.title),
-                ),
-              ),
-              Column(
-                children: [
-                  Card(
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(
-                        8.0,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(4278190080),
-                          width: 1.0,
-                          style: BorderStyle.solid,
-                        ),
-                      ),
-                      child: Text(td.task),
-                    ),
-                  ),
-                  Card(
-                    child: Container(
-                      margin: const EdgeInsets.all(
-                        20.0,
-                      ),
-                      padding: const EdgeInsets.all(
-                        18.0,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(4278190080),
-                          width: 1.0,
-                          style: BorderStyle.solid,
-                        ),
-                      ),
-                      child: Text(
-                        td.date.toString(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          return Card(
+            elevation: 20.0,
+            child: Wrap(
+              children: [
+                textFieldMethod(inputTitle, inputTask),
+                firstColumn(td),
+                secondColumn(td),
+              ],
+            ),
           );
         }).toList(),
       ),
     );
   }
-}
+
+  

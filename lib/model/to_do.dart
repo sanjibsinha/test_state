@@ -1,11 +1,12 @@
 class ToDo {
-  final String id;
+  final int idOfToDo;
   final String title;
+  //final List<String> task;
   final String task;
   final DateTime date;
 
   ToDo({
-    this.id,
+    this.idOfToDo,
     this.title,
     this.task,
     this.date,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../model/to_do.dart';
 import 'package:intl/intl.dart';
+import '../../model/to_do.dart';
 
 Column secondColumn(ToDo td) {
   return Column(
@@ -42,9 +42,11 @@ Column secondColumn(ToDo td) {
               style: BorderStyle.solid,
             ),
           ),
-          child: Text(
-            DateFormat.yMMMd().format(td.date),
-          ),
+          child: Text(DateFormat.yMMMd().format(td.date),
+              style: TextStyle(
+                fontSize: 15.0,
+                fontWeight: FontWeight.bold,
+              )),
         ),
       ),
     ],
