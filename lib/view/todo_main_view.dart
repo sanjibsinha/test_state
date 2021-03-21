@@ -59,21 +59,23 @@ class ToDoMainView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
-        scrollDirection: Axis.vertical,
-        children: todoList.map((td) {
-          return Card(
-            elevation: 20.0,
-            child: Wrap(
-              children: [
-                textFieldMethod(inputTitle, inputTask),
-                firstColumn(td),
-                secondColumn(td),
-              ],
-            ),
-          );
-        }).toList(),
+        children: [
+          textFieldMethod(inputTitle, inputTask),
+          Column(
+            children: todoList.map((td) {
+              return Card(
+                elevation: 20.0,
+                child: Wrap(
+                  children: [
+                    firstColumn(td),
+                    secondColumn(td),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
     );
   }
-
-  
+}
