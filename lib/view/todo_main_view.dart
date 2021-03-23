@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../controller/todo/text_field_method.dart';
-import '../controller/todo/first_column.dart';
-import '../controller/todo/second_column.dart';
+import 'package:test_state/controller/todo/taking_inputs.dart';
+import '../controller/todo/getting_todo_list.dart';
+import '../controller/todo/new_todo.dart';
 import '../model/to_do.dart';
 
 class ToDoMain extends StatelessWidget {
@@ -29,51 +29,74 @@ class ToDoMainFirst extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: ToDoMainView(),
+      body: TestToDo(),
     );
   }
 }
 
-class ToDoMainView extends StatelessWidget {
-  const ToDoMainView({Key key}) : super(key: key);
+class TestToDo extends StatefulWidget {
+  TestToDo({Key key}) : super(key: key);
+
+  @override
+  _TestToDoState createState() => _TestToDoState();
+}
+
+class _TestToDoState extends State<TestToDo> {
   @override
   Widget build(BuildContext context) {
-    final List<ToDo> todoList = [
-      ToDo(
-        idOfToDo: 1,
-        title: 'Marketing',
-        task: 'Fruits',
-        // task: ['Fruits', 'Busicuits', 'Vaegetables', 'Groceries'],
-        date: DateTime.now(),
-      ),
-      ToDo(
-        idOfToDo: 2,
-        title: 'Book Writing',
-        task: 'State in Flutter',
-        // task: ['State in Flutter', 'Immutable Flutter'],
-        date: DateTime.now(),
-      ),
-    ];
-    String inputTitle;
-    String inputTask;
+    return Container(
+      child: ToDoMainView(),
+    );
+  }
+}
+
+class ToDoMainView extends StatefulWidget {
+  const ToDoMainView({Key key}) : super(key: key);
+
+  @override
+  _ToDoMainViewState createState() => _ToDoMainViewState();
+}
+
+class _ToDoMainViewState extends State<ToDoMainView> {
+  final List<ToDo> todoList = [
+    ToDo(
+      id: DateTime.now().toString(),
+      title: 'Marketing',
+      task: 'Fruits',
+      // task: ['Fruits', 'Busicuits', 'Vaegetables', 'Groceries'],
+      date: DateTime.now(),
+    ),
+    ToDo(
+      id: DateTime.now().toString(),
+      title: 'Book Writing',
+      task: 'State in Flutter',
+      // task: ['State in Flutter', 'Immutable Flutter'],
+      date: DateTime.now(),
+    ),
+  ];
+
+  void addToDoList(String inputTxTile, String inputTxTask) {
+    final inputText = ToDo(
+      id: DateTime.now().toString(),
+      title: inputTxTile,
+      task: inputTxTask,
+      date: DateTime.now(),
+    );
+    setState(() {
+      todoList.add(inputText);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
         children: [
-          textFieldMethod(inputTitle, inputTask),
-          Column(
-            children: todoList.map((td) {
-              return Card(
-                elevation: 20.0,
-                child: Wrap(
-                  children: [
-                    firstColumn(td),
-                    secondColumn(td),
-                  ],
-                ),
-              );
-            }).toList(),
+          TakingInputs(
+            addNames: addToDoList,
           ),
+          GettingToDoList(todoList),
         ],
       ),
     );
