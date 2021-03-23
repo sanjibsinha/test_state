@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_state/controller/todo/taking_inputs.dart';
+import '../controller/todo/taking_inputs.dart';
 import '../controller/todo/getting_todo_list.dart';
-import '../controller/todo/new_todo.dart';
 import '../model/to_do.dart';
 
 class ToDoMain extends StatelessWidget {
@@ -60,14 +59,14 @@ class ToDoMainView extends StatefulWidget {
 class _ToDoMainViewState extends State<ToDoMainView> {
   final List<ToDo> todoList = [
     ToDo(
-      id: DateTime.now().toString(),
+      id: '1',
       title: 'Marketing',
       task: 'Fruits',
       // task: ['Fruits', 'Busicuits', 'Vaegetables', 'Groceries'],
       date: DateTime.now(),
     ),
     ToDo(
-      id: DateTime.now().toString(),
+      id: '2',
       title: 'Book Writing',
       task: 'State in Flutter',
       // task: ['State in Flutter', 'Immutable Flutter'],
@@ -75,9 +74,9 @@ class _ToDoMainViewState extends State<ToDoMainView> {
     ),
   ];
 
-  void addToDoList(String inputTxTile, String inputTxTask) {
+  void addToDoList(String idText, String inputTxTile, String inputTxTask) {
     final inputText = ToDo(
-      id: DateTime.now().toString(),
+      id: idText,
       title: inputTxTile,
       task: inputTxTask,
       date: DateTime.now(),
@@ -94,7 +93,7 @@ class _ToDoMainViewState extends State<ToDoMainView> {
       child: ListView(
         children: [
           TakingInputs(
-            addNames: addToDoList,
+            addTasks: addToDoList,
           ),
           GettingToDoList(todoList),
         ],
